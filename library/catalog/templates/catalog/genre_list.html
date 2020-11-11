@@ -1,0 +1,29 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}
+Genres
+{% endblock %}
+
+
+
+{% block content %}
+        <h1>Genres List</h1>
+
+    {% if genre_list %}
+    <ul>
+
+      {% for genre in genre_list %}
+      <li>
+       {{ genre.name }}
+<!--          <a href="{{ genre.get_absolute_url }}">{{ genre.name }}</a>-->
+      </li>
+      {% endfor %}
+
+    </ul>
+
+    {% else %}
+      <p>There are no genres in the library.</p>
+    {% endif %}
+{% endblock %}
+
+{% block body %}{% endblock %}

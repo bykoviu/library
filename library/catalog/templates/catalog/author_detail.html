@@ -1,0 +1,15 @@
+
+{% extends "catalog/base.html" %}
+
+{% block content %}
+
+<h1>Name: {{ author.first_name }}{{ author.last_name }}</h1>
+
+<p><strong>Birthday:</strong> {{ author.date_of_birth }}</p>
+<p><strong>Byography::</strong> {{ author.biography }}</p>
+<p><strong>Dead Date:</strong> {{ author.date_of_death }}</p> 
+ 
+
+{% endblock %}
+{% block body %}{% endblock %}
+{% block sessions %} {% endblock %}
