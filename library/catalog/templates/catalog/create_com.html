@@ -11,7 +11,10 @@ Create comment
        {% csrf_token %}
         {{ form.title }}<br>
         {{ form.comm }}<br>
-        <<button type="submit" class="btn btn-outline-primary"></button>>
+        <input type="text" placeholder="Enter" class="form-control">
+        <textarea placeholder="enter" class="form-control"></textarea>
+        <button type="submit" class="btn btn-outline-primary">Add comment</button>
+        <span>{{ error }}</span>
     </form>
 {% endblock %}
 <!-- {% block sessions %} <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p> {% endblock %}-->

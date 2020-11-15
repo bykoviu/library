@@ -1,0 +1,22 @@
+
+{% extends "catalog/base.html" %}
+
+{% block content %}
+
+<h1>Registration</h1>
+
+<div class="col-4">
+
+    {{form}}
+    <form id='add_form' method="post">
+       {% csrf_token %}
+        <button form='add_form' type="submit"  class="btn btn-primery mt-4">Register</button>
+    </form>
+</div>
+
+ 
+
+{% endblock %}
+{% block body %}{% endblock %}
+{% block comments %}{% endblock %}
+{% block sessions %} {% endblock %}

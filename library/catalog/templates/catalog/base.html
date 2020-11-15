@@ -14,8 +14,16 @@
         <a class="p-2 text-dark" href="/authors">Authors</a>
         <a class="p-2 text-dark" href="/genres">Genres</a>
       </nav>
-      <a class="btn btn-outline-primary" href="#">Sign up</a>
-      <a class="btn btn-outline-primary" href="#">Registration</a>
+      <li class="nav-item">
+          {% url 'login' as url_login %}
+        <a class="btn btn-outline-primary" href="{{ url_login }}">Sign up</a>
+      </li>
+      <li class="nav-item">
+          {% url 'register' as url_register %}
+        <a class="btn btn-outline-primary" href="{{ url_register }}">Registration</a>
+      </li>
+    <a class="nav-lint btn-danger ml-5" href="#">LogOut</a>
+       {{request.user}}
     </div>
 
     {% block content %}

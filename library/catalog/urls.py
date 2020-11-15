@@ -10,5 +10,7 @@ urlpatterns = [
         path('author/<int:pk>', views.AuthorDetailView.as_view(), name='author-detail'),
         path('genres', views.GenreListView.as_view(), name='genres'),
         path('create_com', views.create, name='create_com'),
+        path('login', views.RegisterView.as_view(), name='login'),
+        path('Register', views.RegistrationView.as_view(), name='register'),
 
 ]
