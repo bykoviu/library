@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Book, Author, BookInstance, Genre, Comment
 from django.views import generic
-from .forms import CommentForm, AuthUserForm, RegisterUserForm
-from django.contrib.auth.views import LoginView
+from .forms import CommentForm, RegisterUserForm, AuthUserForm
+from django.contrib.auth import authenticate, login
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.models import User
 
@@ -60,10 +60,29 @@ class AuthorDetailView(generic.DetailView):
 class GenreListView(generic.ListView):
     model = Genre
 
-class RegisterView(LoginView):
-    template_name = 'catalog/login.html'
-    form_class = AuthUserForm
-    success_url = reverse_lazy('base')
+class RegisterView(generic.View):
+    
+    def get(self, request, *args, **kwargs):
+        form = AuthUserForm(request.POST or None)
+        context = {'form': form}
+        return render(request, 'catalog/login.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form = AuthUserForm(request.POST or None)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('/')
+        return render(request, 'catalog/login.html', {'form': form})
+        
+        
+    
+    # template_name = 'catalog/login.html'
+    # form_class = AuthUserForm
+    # success_url = reverse_lazy('base')
 
 class RegistrationView(generic.CreateView):
     model = User

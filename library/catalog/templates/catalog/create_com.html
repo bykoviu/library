@@ -11,8 +11,8 @@ Create comment
        {% csrf_token %}
         {{ form.title }}<br>
         {{ form.comm }}<br>
-        <input type="text" placeholder="Enter" class="form-control">
-        <textarea placeholder="enter" class="form-control"></textarea>
+        <input type="text" name="itle" placeholder="Enter" class="form-control">
+        <textarea placeholder="enter" name="comm" class="form-control"></textarea>
         <button type="submit" class="btn btn-outline-primary">Add comment</button>
         <span>{{ error }}</span>
     </form>
