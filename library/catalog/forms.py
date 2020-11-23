@@ -44,16 +44,26 @@ class AuthUserForm(AuthenticationForm, ModelForm):
     
 
 class RegisterUserForm(ModelForm):
+    password = CharField(label='Password', widget=PasswordInput)
+    password2 = CharField(label='Repeat password', widget=PasswordInput)
     class Meta:
         model = User
-        fields = ('username', 'password')
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields:
-            self.fields[field].widget.attrs['class'] = 'form-control'
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.set_password(self.cleaned_data['password'])
-        if commit:
-            user.save()
-        return user
+        fields = ('username', 'password', 'email')
+    
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise ValidationError('Passwords don\'t match.')
+        return cd['password2']
+    
+    
+    # def __init__(self, *args, **kwargs):
+        # super().__init__(*args, **kwargs)
+        # for field in self.fields:
+            # self.fields[field].widget.attrs['class'] = 'form-control'
+    # def save(self, commit=True):
+        # user = super().save(commit=False)
+        # user.set_password(self.cleaned_data['password'])
+        # if commit:
+            # user.save()
+        # return user

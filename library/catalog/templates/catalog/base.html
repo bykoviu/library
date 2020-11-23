@@ -16,14 +16,38 @@
       </nav>
       <li class="nav-item">
           {% url 'login' as url_login %}
-        <a class="btn btn-outline-primary" href="{{ url_login }}">Sign up</a>
+        
+		{% if user.is_authenticated %}
+     <li>User: {{ user.get_username }}</li>
+     <li><a class="nav-lint btn-danger ml-5" href="{% url 'logout'%}">Logout</a></li>   
+   {% else %}
+     <li><a class="btn btn-outline-primary" href="{{ url_login }}?next={{request.path}}">Login</a></li>   
+	<li class="nav-item">
+          {% url 'register' as url_register %}
+        <a class="btn btn-outline-primary" href="{{ url_register }}">Registration</a>
+      </li>
+   {% endif %} 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!--<a class="btn btn-outline-primary" href="{{ url_login }}">Sign up</a>
       </li>
       <li class="nav-item">
           {% url 'register' as url_register %}
         <a class="btn btn-outline-primary" href="{{ url_register }}">Registration</a>
       </li>
     <a class="nav-lint btn-danger ml-5" href="#">LogOut</a>
-       {{request.user}}
+       {{request.user}}-->
     </div>
 
     {% block content %}
@@ -84,7 +108,7 @@
       </div>
 {% endblock %}
 
-
+{% if user.is_authenticated %}
 
 {% block comments %}
     <a class="btn btn-outline-primary" href="/create_com">Left comment</a>
@@ -101,7 +125,10 @@
     {% endif %}
 
 {% endblock %}
-
+{% else %}
+	<p> LogIn for left comments.
+	</p>
+{% endif %}
     {% block sessions %}
         <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
     {% endblock %}

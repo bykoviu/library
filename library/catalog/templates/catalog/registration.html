@@ -1,22 +1,21 @@
 
 {% extends "catalog/base.html" %}
 
+{% block title %}Create an account{% endblock %}
+
 {% block content %}
-
-<h1>Registration</h1>
-
-<div class="col-4">
-
-    {{form}}
-    <form id='add_form' method="post">
-       {% csrf_token %}
-        <button form='add_form' type="submit"  class="btn btn-primery mt-4">Register</button>
+    <h1>Create an account</h1>
+    <p>Please, sign up using the following form:</p>
+    <form action="." method="post">
+        {{ user_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Create my account"></p>
     </form>
-</div>
+{% endblock %}
 
  
 
-{% endblock %}
+
 {% block body %}{% endblock %}
 {% block comments %}{% endblock %}
 {% block sessions %} {% endblock %}
